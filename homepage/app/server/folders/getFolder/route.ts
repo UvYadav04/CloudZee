@@ -8,10 +8,11 @@ export async function GET(req: NextRequest) {
         const userID = req.nextUrl.searchParams.get('userId')
         const userdetails = await pool.query("SELECT * FROM USERS WHERE ID = $1", [userID])
         if (userdetails.rows.length == 0)
-            return NextResponse.json({ success: false, message: "fetching failed" }); // Return rows as JSON
-        const userfolders = userdetails.rows.fol
-        // console.log(name)
+            return NextResponse.json({ success: false, message: "user not found" }); // Return rows as JSON
+
         const result = await pool.query('SELECT * FROM folders WHERE ID = $1', [folderId]);
+        if (result.rows.length == 0)
+            return NextResponse.json({ success: false, message: "folder not found" }); // Return
         if (result.rows[0].owner_id != userID)
             return new Response("User mis configuration", { status: 404 });
         return NextResponse.json({ success: true, data: result.rows[0] }); // Return rows as JSON

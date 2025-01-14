@@ -19,7 +19,7 @@ export const getUserId = createAsyncThunk(
             if (!data.success) {
                 throw new Error('Error occured on server side');
             }
-            // console.log(data)
+            console.log(data)
             // dispatch(setHomefolder(data.homeid))
             return data;
 

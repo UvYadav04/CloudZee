@@ -1,11 +1,8 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-
-
-
+import { AsyncThunkAction, createAsyncThunk, GetThunkAPI } from '@reduxjs/toolkit';
 
 export const UploadFile = createAsyncThunk(
     'folder/getFolder', // Action type
-    async ({ file, parentId, userId }: { file: any, parentId: string, userId: String }, { rejectWithValue }) => {
+    async ({ file, parentId, userId }: { file: any, parentId: string, userId: String }, { rejectWithValue }: any) => {
         try {
             // alert("called to homefolder")
             // Making a request to fetch folder data based on the folder name and folder ID

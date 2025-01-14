@@ -34,15 +34,14 @@ const profileSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            .addCase(getUserId.pending, (state: State, action) => {
+                state.userloading = true
+            })
             .addCase(getUserId.fulfilled, (state: State, action) => {
-                // alert("fulfilled user")
-                // state.userloading = false;
-                // console.log(action)
                 state.userId = action.payload.userid
                 state.HomeId = action.payload.homeid
             })
             .addCase(getUserId.rejected, (state: State, action: any) => {
-                // console.log(action)
                 state.userloading = false;
                 state.userId = null
                 state.HomeId = null;
@@ -68,12 +67,12 @@ const profileSlice = createSlice({
             state.userloading = false;
         },
         clearProfile: (state: State) => {
-            state.profile = null;
             state.userloading = false;
+            state.profile = null;
             state.usererror = null;
         }
     },
 });
 
-export const { setProfile, setProfileLoading, setProfileError, clearProfile, setProfileLoadingFalse } = profileSlice.actions;
+export const { setProfile, setProfileLoading, setProfileError, clearProfile, setProfileLoadingFalse, setHomeID } = profileSlice.actions;
 export default profileSlice.reducer;

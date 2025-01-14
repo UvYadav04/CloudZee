@@ -5,6 +5,7 @@ import { UserProvider } from '@auth0/nextjs-auth0/client'
 import StoreProvider from "./StoreProvider";
 import { FpjsProvider } from "@fingerprintjs/fingerprintjs-pro-react";
 import persistStore from "redux-persist/es/persistStore";
+// import store'
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

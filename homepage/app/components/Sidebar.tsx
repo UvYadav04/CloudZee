@@ -8,14 +8,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import NewFolder from './NewFolder';
 import { createNewFolder } from '@/lib/redux/actions/folder';
 import { RootState } from '@/lib/Store';
-// import { uploadFile } from '@/lib/redux/slices/UploadFile';
+import { uploadFile } from '@/lib/redux/slices/UploadFile';
 function Sidebar() {
     const dispatch = useDispatch()
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [newf, setnewf] = useState<boolean>(false)
-    const { fetched, currentFolder } = useSelector((state: RootState) => state.fetchFolder)
-    const { profile, userId } = useSelector((state: RootState) => state.userProfile)
-    // console.log(profile)
+    const { currentFolder } = useSelector((state: RootState) => state.fetchFolder)
+    const { userId } = useSelector((state: RootState) => state.userProfile)
 
     const handleButtonClick = () => {
         if (fileInputRef.current) {
@@ -26,17 +25,17 @@ function Sidebar() {
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
-            // console.log('Selected file:', file);
             handleFileUpload(file)
         }
     };
 
     const handleFileUpload = (file: File) => {
-        // dispatch(uploadFile(file));
+        dispatch(uploadFile({ file: file, parentId: currentFolder[currentFolder.length - 1], userId: userId }));
     };
 
     const newfolder = async (input: String) => {
-        // alert(input)
+        if (input == "")
+            return;
         dispatch(createNewFolder({ folderName: input, parentId: currentFolder[currentFolder.length - 1], userId: userId }))
     }
     return (

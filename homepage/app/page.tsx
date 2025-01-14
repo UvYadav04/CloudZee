@@ -1,83 +1,63 @@
-'use client'
+'use client';
 
-import Navbar from "./components/Navbar";
 import { useEffect, useState } from "react";
-import Feedback from "./features/Feedback";
-import Sidebar from "./components/Sidebar";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "@/lib/Store";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { RootState } from "@/lib/Store";
-import { setProfile, setProfileError, setProfileLoading, setProfileLoadingFalse } from "@/lib/redux/slices/ProfileSlice";
-import { getUserId } from "@/lib/redux/actions/profile";
 import { useRouter } from "next/navigation";
-import { getFolderwithId } from "@/lib/redux/actions/folder";
-
+import { AppDispatch } from "@/lib/Store";
+// import { persistor } from "@/lib/Store";
+import { RootState } from "@/lib/Store";
+import { setHomeID, setProfile, setProfileError, setProfileLoading } from "@/lib/redux/slices/ProfileSlice";
+import { getUserId } from "@/lib/redux/actions/profile";
 
 export default function Home() {
-  const [timeid, setTimeid] = useState<NodeJS.Timeout | null>(null);
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
+  const [timeidstore, setTimeidStore] = useState<Array<NodeJS.Timeout>>([]);
 
-  const { profile, userloading, usererror, userId } = useSelector((state: RootState) => state.userProfile);
+  const { profile, userloading, usererror } = useSelector((state: RootState) => state.userProfile);
   const { user, isLoading, error } = useUser();
 
 
-  const handleBeforeUnload = () => {
-    alert("refreshign")
-  };
-
   useEffect(() => {
-    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      // Custom message is ignored in most modern browsers, but it ensures compatibility
-      const message = "Are you sure you want to leave?";
-      console.log(message)
-      event.returnValue = message;  // For modern browsers
-      return message;  // For older browsers
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    // Cleanup function to remove the event listener
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
-
-
-
-  // console.log(userloading, isLoading)
-
-  useEffect(() => {
-    if (timeid) clearTimeout(timeid);
+    // Reset timeout and state if the component is going to unmount
+    timeidstore.forEach((item) => clearTimeout(item));
+    // If profile doesn't exist, check user states
     if (!profile) {
       if (isLoading) {
-        const timeoutId = setTimeout(() => router.push('/api/error'), 8000);
-        setTimeid(timeoutId);
+        const timeoutId = setTimeout(() => {
+          // Handle timeout behavior here (if needed)
+        }, 11000);
+        setTimeidStore((prev) => [...prev, timeoutId]);
         dispatch(setProfileLoading());
       } else if (error || usererror) {
         dispatch(setProfileError(error || usererror));
-        router.push('/api/error');
+        router.push("/api/error");
       } else if (!user) {
-        router.push('/api/auth/login');
-      } else
+        router.push("/api/auth/login");
+      } else {
         dispatch(setProfile(user));
+      }
     }
+
     return () => {
-      if (timeid) clearTimeout(timeid);
+      // Cleanup timeout on unmount or whenever dependencies change
+      timeidstore.forEach((item) => clearTimeout(item));
+
     };
   }, [user, isLoading, error, usererror]);
 
   useEffect(() => {
     if (profile) {
+      // console.log(pr ofile)
       dispatch(getUserId(profile))
         .then((data: any) => {
+          timeidstore.forEach((item) => clearTimeout(item));
           router.push(`/${data.payload.userid}/home`)
         })
         .catch((error) => {
-          console.log(error)
-          router.push('/api/error')
-        })
+          router.push("/api/error");
+        });
     }
   }, [profile]);
 

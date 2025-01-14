@@ -9,6 +9,7 @@ interface FileUploadState {
     currentFolder: Array<string>;
 }
 
+
 const initialState: FileUploadState = {
     loading: true,
     error: null,
@@ -16,6 +17,7 @@ const initialState: FileUploadState = {
     fetched: {},
     currentFolder: []
 };
+
 
 
 const getFolderSlice = createSlice({
@@ -29,8 +31,7 @@ const getFolderSlice = createSlice({
                 state.success = false;
             })
             .addCase(getFolderwithId.fulfilled, (state: FileUploadState, action) => {
-                // console.log(action)
-                state.loading = true;
+                state.loading = false;
                 state.success = true;
                 state.fetched[action.payload.data.id] = action.payload.data; // Store in object
             })
@@ -38,7 +39,7 @@ const getFolderSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload.error;
                 state.success = false;
-            });
+            })
     },
     reducers: {
         resetState: (state: FileUploadState) => {
