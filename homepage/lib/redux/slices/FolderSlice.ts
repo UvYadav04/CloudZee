@@ -50,9 +50,18 @@ const getFolderSlice = createSlice({
         },
         setHomefolder: (state: FileUploadState, action: any) => {
             state.currentFolder = [action.payload];
+        },
+        updateFetched: (state: FileUploadState, action: any) => {
+            // alert("updaeting ")
+            // console.log(action)
+            action.payload?.map((item: any) => {
+                // console.log(item)
+                state.fetched[item.id] = item;
+            })
+            // console.log(state.fetched)
         }
     }
 });
 
-export const { resetState, setHomefolder } = getFolderSlice.actions;
+export const { resetState, setHomefolder, updateFetched } = getFolderSlice.actions;
 export default getFolderSlice.reducer;

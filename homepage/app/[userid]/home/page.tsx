@@ -10,6 +10,7 @@ import Sidebar from '@/app/components/Sidebar'
 import { RootState } from '@/lib/Store'
 import { getFolderwithId } from '@/lib/redux/actions/folder'
 import { setHomefolder } from '@/lib/redux/slices/FolderSlice'
+import FolderList from '@/app/components/FolderList'
 function page({ params }: { params: any }) {
   const router = useRouter()
   const dispatch = useDispatch()
@@ -17,8 +18,8 @@ function page({ params }: { params: any }) {
   const { profile, userloading, userId, HomeId } = useSelector((state: RootState) => state.userProfile)
   const { currentFolder, fetched, loading } = useSelector((state: RootState) => state.fetchFolder)
   // console.log(userloading)
-  console.log(HomeId)
-  console.log(fetched)
+  // console.log(HomeId)
+  // console.log(fetched)
   // console.log(params)
   useEffect(() => {
     dispatch(setProfileLoadingFalse())
@@ -27,6 +28,7 @@ function page({ params }: { params: any }) {
   }, [router, HomeId])
 
   useEffect(() => {
+    // console.log(fetched)
     if (HomeId) {
       if (fetched[HomeId] == null) {
         dispatch(getFolderwithId({ folderId: HomeId, userId: userId }))
@@ -59,15 +61,29 @@ function page({ params }: { params: any }) {
             </div>
           )}
 
-          <div className="folderdata">
-            {
-              HomeId ?
-                fetched[HomeId].children?.map((item: any) => {
-                  return (
-                    <li>{fetched[item].folderName}</li>
-                  )
-                }) : null
-            }
+          <div className="folderdata mt-4 px-5 py-2">
+            <table  >
+              <thead >
+                <tr >
+                  <th className="px-6 py-3 text-left text-sm font-medium text-sky-300" ></th>
+                  <th className="px-6 py-3 text-left text-sm font-medium text-sky-300" >Name</th>
+                  <th className="px-6 py-3 text-left text-sm font-medium text-sky-300" >Created_At</th>
+                  <th className="px-6 py-3 text-left text-sm font-medium text-sky-300" >Last_Modified</th>
+                  <th className="px-6 py-3 text-left text-sm font-medium text-sky-300" >Size</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  HomeId ?
+                    fetched[HomeId].childern?.map((item: any) => {
+                      return (
+                        <FolderList itemdata={fetched[item]} />
+                      )
+                    }) : null
+                }
+              </tbody>
+            </table>
+
           </div>
         </div>
       </div>

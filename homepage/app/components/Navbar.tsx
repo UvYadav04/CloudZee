@@ -19,13 +19,11 @@ function navbar({ setfeedback }: any) {
     const [privacy, showprivacy] = useState<boolean>(false)
     const [input, setinput] = useState<HTMLInputElement>();
     const { profile, userloading, userId, HomeId } = useSelector((state: RootState) => state.userProfile)
-    // console.log(profile)
 
-    //we are gonna search if user stops for atleast 1second,
     const passtime = () => {
         const timeoutid = setTimeout(() => {
             // searchthecontent()
-            // alert("searching")
+            alert("searching")
         }, 1000);
 
         settimeid(timeoutid)

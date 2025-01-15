@@ -42,7 +42,6 @@ function Sidebar() {
         <div className='lg:flex top-0 left-0 min-h-fit h-[91.5vh] min-w-fit w-64 bg-blue-100 py-4 flex flex-col place-items-start px-2 flex-shrink-0'>
             <button className='w-[90%] h-fit py-2 mx-auto text-3xl text-center text-blue-700 bg-white rounded-md' style={{ boxShadow: "4px 4px 2px #93c5fd" }} onClick={handleButtonClick} ><VscNewFile className='mb-[3px] me-3 inline' />New File</button>
             <input type="file" className='hidden' ref={fileInputRef} onChange={handleFileChange} />
-
             <Barbutton foldername={"New Folder"} onClick={() => setnewf(true)} />
             <Barbutton foldername={"Recents"} />
             <Barbutton foldername={"Favourites"} />
