@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 function NewFolder({ Cancel, Submit }: { Cancel: any; Submit: any }) {
-    const [input, setinput] = useState<String | number | undefined>("");
+    const [input, setinput] = useState<string | number | undefined>("");
     return (
         <div className='h-36 w-96 absolute top-[20%] left-[40%] bg-sky-200 p-6'>
             <div className='w-full h-full border-[1px] border-white p-2 bg-sky-100 flex flex-row justify-between flex-wrap'>

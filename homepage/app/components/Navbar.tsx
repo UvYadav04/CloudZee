@@ -10,16 +10,15 @@ import Userprofile from '../features/user/Userprofile';
 import Privacy from '../features/privacy/Privacy';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/Store';
+import { useRef } from 'react';
 
 
-
-function navbar({ setfeedback }: any) {
+function navbar({ setfeedback, heightref }: any) {
     const [timeid, settimeid] = useState<string | NodeJS.Timeout>();
     const [showprofile, setshowprofile] = useState<boolean>(false);
     const [privacy, showprivacy] = useState<boolean>(false)
     const [input, setinput] = useState<HTMLInputElement>();
     const { profile, userloading, userId, HomeId } = useSelector((state: RootState) => state.userProfile)
-
     const passtime = () => {
         const timeoutid = setTimeout(() => {
             // searchthecontent()
