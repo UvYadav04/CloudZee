@@ -13,7 +13,7 @@ import { RootState } from '@/lib/Store';
 import { useRef } from 'react';
 
 
-function navbar({ setfeedback, heightref }: any) {
+function navbar({ setfeedback }: any) {
     const [timeid, settimeid] = useState<string | NodeJS.Timeout>();
     const [showprofile, setshowprofile] = useState<boolean>(false);
     const [privacy, showprivacy] = useState<boolean>(false)

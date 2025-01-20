@@ -13,12 +13,6 @@ import { setHomefolder } from '@/lib/redux/slices/FolderSlice'
 import FolderList from '@/app/components/FolderList'
 import './page.css'
 function page({ params }: { params: any }) {
-  let heightref = useRef(null)
-  useEffect(() => {
-    if (heightref.current) {
-      alert(heightref?.current?.height)
-    }
-  }, [])
   const router = useRouter()
   const dispatch = useDispatch()
   const [feedback, setFeedback] = useState<boolean>(false);
@@ -53,7 +47,7 @@ function page({ params }: { params: any }) {
 
   return (
     <div className={`Homepage min-w-fit max-w-[100vw] w-[100vw] flex flex-col `} >
-      <Navbar setFeedback={setFeedback} heightref={heightref} />
+      <Navbar setFeedback={setFeedback} />
       <div className="main flex flex-row min-w-fit w-[100%] max-w-[100vw]  flex-1 overflow-y-scroll" style={{ height: "inherit" }}>
         <Sidebar />
         <div className="right flex-1 flex flex-col overflow-y-scroll" style={{ height: "inherit" }} >
