@@ -1,14 +1,14 @@
 import { AsyncThunkAction, createAsyncThunk, GetThunkAPI } from '@reduxjs/toolkit';
 
 export const UploadFile = createAsyncThunk(
-    'folder/getFolder', // Action type
+    'fileupload', // Action type
     async ({ file, parentId, userId }: { file: any, parentId: string, userId: String }, { rejectWithValue }: any) => {
         try {
-            // alert("called to homefolder")
-            // Making a request to fetch folder data based on the folder name and folder ID
-            // console.log(folderId, userId)
-            const response = await fetch(`http://localhost:3000/server/files/uploadFile?file=${file}&parentId=${encodeURIComponent(parentId)}&userId=${userId}`, {
-                method: "GET",
+            const formData = new FormData();
+            formData.append('file', file);
+            const response = await fetch(`http://localhost:3000/server/files/uploadFile?parentId=${encodeURIComponent(parentId)}&userId=${userId}`, {
+                method: "POST",
+                body: formData
             });
 
             if (!response.ok) {
@@ -19,10 +19,9 @@ export const UploadFile = createAsyncThunk(
             if (!folderData.success)
                 throw new Error('Failed to fetch folder data');
 
-            // console.log(folderData)
-            return folderData; // Return the fetched folder data
+            return folderData;
         } catch (error: any) {
-            return rejectWithValue(error.message); // Return error message if the request fails
+            return rejectWithValue(error.message);
         }
     }
 );

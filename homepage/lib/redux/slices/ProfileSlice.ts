@@ -38,10 +38,12 @@ const profileSlice = createSlice({
                 state.userloading = true
             })
             .addCase(getUserId.fulfilled, (state: State, action) => {
-                state.userId = action.payload.userid
-                state.HomeId = action.payload.homeid
+                console.log(action.payload)
+                state.userId = action.payload.data.userid
+                state.HomeId = action.payload.data.homeid
             })
             .addCase(getUserId.rejected, (state: State, action: any) => {
+                // alert("rejected")
                 state.userloading = false;
                 state.userId = null
                 state.HomeId = null;

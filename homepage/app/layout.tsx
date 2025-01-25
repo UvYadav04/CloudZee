@@ -27,7 +27,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <StoreProvider>
+          {/* store provider is the wrapper to use redux states in the app */}
           <UserProvider>
+            {/* store provider is the wrapper used for using Auth0 for login purpose*/}
             {children}
           </UserProvider>
         </StoreProvider>

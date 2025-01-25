@@ -5,9 +5,6 @@ export const getFolderwithId = createAsyncThunk(
     'folder/getFolder', // Action type
     async ({ folderId, userId }: { folderId: string, userId: String }, { rejectWithValue }) => {
         try {
-            // alert("called to homefolder")
-            // Making a request to fetch folder data based on the folder name and folder ID
-            // console.log(folderId, userId)
             const response = await fetch(`http://localhost:3000/server/folders/getFolder?folderId=${encodeURIComponent(folderId)}&userId=${userId}`, {
                 method: "GET",
             });
@@ -19,9 +16,8 @@ export const getFolderwithId = createAsyncThunk(
             const folderData = await response.json();
             if (!folderData.success)
                 throw new Error('Failed to fetch folder data');
-
-            // console.log(folderData)
-            return folderData; // Return the fetched folder data
+            console.log(folderData)
+            return folderData;
         } catch (error: any) {
             return rejectWithValue(error.message); // Return error message if the request fails
         }

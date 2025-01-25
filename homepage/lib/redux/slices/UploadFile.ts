@@ -30,15 +30,18 @@ const fileUploadSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(UploadFile.pending, (state: FileUploadState) => {
+                alert("pending")
                 state.loading = true;
                 state.error = null;
                 state.success = false;
             })
             .addCase(UploadFile.fulfilled, (state: FileUploadState) => {
+                alert("fulfieed")
                 state.loading = false;
                 state.success = true;
             })
             .addCase(UploadFile.rejected, (state: FileUploadState, action: PayloadAction<any>) => {
+                alert("rejected ")
                 state.loading = false;
                 state.error = action.payload;
                 state.success = false;

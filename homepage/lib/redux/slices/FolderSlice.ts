@@ -26,16 +26,19 @@ const getFolderSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getFolderwithId.pending, (state: FileUploadState) => {
+                alert("pending")
                 state.loading = true;
                 state.error = null;
                 state.success = false;
             })
             .addCase(getFolderwithId.fulfilled, (state: FileUploadState, action) => {
+                alert("fullfilled")
                 state.loading = false;
                 state.success = true;
                 state.fetched[action.payload.data.id] = action.payload.data; // Store in object
             })
             .addCase(getFolderwithId.rejected, (state: FileUploadState, action: any) => {
+                alert("rejected")
                 state.loading = false;
                 state.error = action.payload.error;
                 state.success = false;
