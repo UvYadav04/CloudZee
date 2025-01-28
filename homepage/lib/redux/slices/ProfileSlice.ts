@@ -76,5 +76,5 @@ const profileSlice = createSlice({
     },
 });
 
-export const { setProfile, setProfileLoading, setProfileError, clearProfile, setProfileLoadingFalse, setHomeID } = profileSlice.actions;
+export const { setProfile, setProfileLoading, setProfileError, clearProfile, setProfileLoadingFalse } = profileSlice.actions;
 export default profileSlice.reducer;

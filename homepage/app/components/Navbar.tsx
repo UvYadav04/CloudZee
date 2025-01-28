@@ -12,7 +12,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/Store';
 import { useRef } from 'react';
 
-
 function navbar({ setfeedback }: any) {
     //time id will store a timeOutId that we will be using to search when users stops typing (0.5 seconds gap)
     const [timeid, settimeid] = useState<string | NodeJS.Timeout>();
@@ -74,14 +73,14 @@ function navbar({ setfeedback }: any) {
 
                 <div className="profile  xl:w-10 lg:w-9 xl:h-10 lg:h-9 w-8 h-8 rounded-full my-auto cursor-pointer relative" onClick={() => setshowprofile(!showprofile)} >
 
-                    {
+                    {/* {
                         userloading ?
                             <span className="loader2"></span>
                             :
                             (
                                 profile?.picture ? <Image src={profile?.picture} width={100} height={100} className='rounded-full' alt="userimage" /> : profile?.email?.charAt(0).toUpperCase()
                             )
-                    }
+                    } */}
 
                     {showprofile ? <Userprofile User={profile} setshowprofile={setshowprofile} /> : null}
 
