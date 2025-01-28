@@ -7,7 +7,7 @@ import { redirect, useRouter } from "next/navigation";
 import { AppDispatch } from "@/lib/Store";
 // import { persistor } from "@/lib/Store";
 import { RootState } from "@/lib/Store";
-import { setHomeID, setProfile, setProfileError, setProfileLoading } from "@/lib/redux/slices/ProfileSlice";
+import { setProfile, setProfileError, setProfileLoading } from "@/lib/redux/slices/ProfileSlice";
 import { getUserId } from "@/lib/redux/actions/profile";
 
 export default function Home() {
