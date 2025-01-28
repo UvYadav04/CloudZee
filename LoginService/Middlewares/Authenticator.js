@@ -1,4 +1,3 @@
-const { pool } = require('../Database/db')
 
 const authenticator = (req, res, next) => {
     // console.log(req)

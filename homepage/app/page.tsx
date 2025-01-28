@@ -32,7 +32,7 @@ export default function Home() {
       if (isLoading) {
 
         const timeoutId = setTimeout(() => {
-          router.push("/api/error")
+          redirect("/api/error")
         }, 11000);
 
         setTimeidStore((prev) => [...prev, timeoutId]);
@@ -42,7 +42,7 @@ export default function Home() {
 
         //if usererror or error from fetching from useUser, we will redirect to error page
         dispatch(setProfileError(error || usererror));
-        router.push("/api/error");
+        redirect("/api/error");
 
       } else if (!user) {
 

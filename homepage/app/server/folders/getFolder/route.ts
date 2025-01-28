@@ -8,29 +8,19 @@ export async function GET(req: NextRequest) {
         const folderId = req.nextUrl.searchParams.get("folderId");
         const userId = req.nextUrl.searchParams.get("userId");
 
-        // Validate inputs
-        if (!folderId || !userId) {
-            return NextResponse.json({ success: false, message: "Missing folderId or userId" }, { status: 400 });
-        }
+        const response = await fetch('http://localhost:5000/folders/openFolder', {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({ userId: userId, folderId: folderId })
 
-        // Query the database
-        const result = await pool`
-            SELECT * FROM folders WHERE id = ${folderId}
-        `;
+        })
 
-        // Handle folder not found
-        if (result.length === 0) {
-            return NextResponse.json({ success: false, message: "Folder not found" }, { status: 404 });
-        }
-
-        // Check ownership
-        const folder = result[0];
-        if (folder.owner_id !== userId) {
-            return NextResponse.json({ success: false, message: "User misconfiguration: Not the folder owner" }, { status: 403 });
-        }
-
-        // Return success response
-        return NextResponse.json({ success: true, data: folder });
+        const data = await response.json()
+        if (!data.success)
+            return NextResponse.json({ success: false, message: "server error" })
+        return NextResponse.json({ success: true, data: data })
     } catch (err) {
         console.error("Database query failed:", err);
         return NextResponse.json({ success: false, message: "Database fetch failed" }, { status: 500 });

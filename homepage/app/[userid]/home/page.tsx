@@ -11,6 +11,7 @@ import { RootState } from '@/lib/Store'
 import { getFolderwithId } from '@/lib/redux/actions/folder'
 import { setHomefolder } from '@/lib/redux/slices/FolderSlice'
 import './page.css'
+import FolderList from '@/app/components/FolderList'
 
 function page({ params }: { params: any }) {
 
@@ -20,6 +21,8 @@ function page({ params }: { params: any }) {
   const { profile, userloading, userId, HomeId } = useSelector((state: RootState) => state.userProfile)
   const { currentFolder, fetched, loading } = useSelector((state: RootState) => state.fetchFolder)
 
+  console.log(HomeId)
+  console.log(fetched)
   // alert(HomeId)
   //when this url page will open this side effect will run to turn off loading and set the home folder Id in user profile
   useEffect(() => {
@@ -32,12 +35,12 @@ function page({ params }: { params: any }) {
 
   useEffect(() => {
     if (HomeId) {
-      if (fetched[HomeId] == null) {
+      if (fetched[HomeId] == null || undefined) {
         alert("fetched is null")
         dispatch(getFolderwithId({ folderId: HomeId, userId: userId }))
       }
     }
-  }, [fetched])
+  }, [])
 
   //if any of the loader(userloading or loading ) we will return a loader 
   if (userloading || loading) {

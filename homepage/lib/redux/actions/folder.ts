@@ -14,6 +14,7 @@ export const getFolderwithId = createAsyncThunk(
             }
 
             const folderData = await response.json();
+            console.log(folderData)
             if (!folderData.success)
                 throw new Error('Failed to fetch folder data');
             console.log(folderData)

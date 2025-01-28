@@ -35,7 +35,12 @@ const getFolderSlice = createSlice({
                 alert("fullfilled")
                 state.loading = false;
                 state.success = true;
-                state.fetched[action.payload.data.id] = action.payload.data; // Store in object
+                console.log(action.payload)
+                // action.payload?.data?.data.map((item: any) => {
+                //     // console.log(item)
+                //     state.fetched[item.id] = item;
+                //     // state.fetched[item.id].received = 0;
+                // })
             })
             .addCase(getFolderwithId.rejected, (state: FileUploadState, action: any) => {
                 alert("rejected")
@@ -56,11 +61,8 @@ const getFolderSlice = createSlice({
         },
         updateFetched: (state: FileUploadState, action: any) => {
             // alert("updaeting ")
-            // console.log(action)
-            action.payload?.map((item: any) => {
-                // console.log(item)
-                state.fetched[item.id] = item;
-            })
+            console.log(action)
+            state.fetched[action.payload.id] = action.payload; // Store in object
             // console.log(state.fetched)
         }
     }

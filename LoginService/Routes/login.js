@@ -4,7 +4,6 @@ const pool = require('../Database/db')
 
 loginrouter.get('/', async (req, res) => {
     try {
-        // console.log(req)
         const email = req.email
         const userdetails = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
 
@@ -18,11 +17,13 @@ loginrouter.get('/', async (req, res) => {
             await pool.query("UPDATE USERS SET folders = array_append(folders, $1:: UUID) WHERE id = $2", [home.rows[0].id, res.rows[0].id]);
             const userid = res.rows[0].id;
             const homeid = home.rows[0].id;
-            return res.json({ success: true, userid, homeid })
+            return res.json({ success: true, userid, homeid, home: home.rows[0] })
         }
         const userid = userdetails.rows[0].id;
         const homeid = userdetails.rows[0].home_id;
-        return res.json({ success: true, userid, homeid })
+        const homedetails = await pool.query("Select * from folders where id = $1", [homeid])
+        console.log(userid, homeid)
+        return res.json({ success: true, userid, homeid, home: homedetails.rows[0] })
 
     } catch (error) {
         console.log(error)

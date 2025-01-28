@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { updateFetched } from '../slices/FolderSlice';
 
 
 export const getUserId = createAsyncThunk(
@@ -20,6 +21,7 @@ export const getUserId = createAsyncThunk(
                 throw new Error('Error occured on server side');
             }
             console.log(data)
+            dispatch(updateFetched(data.data.home))
             return data;
 
         } catch (error: any) {
