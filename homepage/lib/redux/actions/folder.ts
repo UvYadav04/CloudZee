@@ -27,7 +27,7 @@ export const getFolderwithId = createAsyncThunk(
 
 export const createNewFolder = createAsyncThunk(
     'folder/newFolder', // Action type
-    async ({ folderName, parentId, userId }: { folderName: String, parentId: string, userId: String }, { dispatch, rejectWithValue }) => {
+    async ({ folderName, parentId, userId }: { folderName: String, parentId: string, userId: String | null }, { dispatch, rejectWithValue }) => {
         try {
             // alert("called to homefolder")
             // Making a request to fetch folder data based on the folder name and folder ID

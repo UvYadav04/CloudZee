@@ -2,7 +2,7 @@ import { AsyncThunkAction, createAsyncThunk, GetThunkAPI } from '@reduxjs/toolki
 
 export const UploadFile = createAsyncThunk(
     'fileupload', // Action type
-    async ({ file, parentId, userId }: { file: any, parentId: string, userId: String }, { rejectWithValue }: any) => {
+    async ({ file, parentId, userId }: { file: any, parentId: string, userId: String | null }, { rejectWithValue }: any) => {
         try {
             const formData = new FormData();
             formData.append('file', file);

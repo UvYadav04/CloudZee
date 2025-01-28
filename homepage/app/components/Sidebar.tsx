@@ -6,11 +6,11 @@ import Barbutton from './Barbutton';
 import { useSelector, useDispatch } from 'react-redux';
 import NewFolder from './NewFolder';
 import { createNewFolder } from '@/lib/redux/actions/folder';
-import { RootState } from '@/lib/Store';
+import { AppDispatch, RootState } from '@/lib/Store';
 import { UploadFile } from '@/lib/redux/actions/File';
 function Sidebar() {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<AppDispatch>()
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [newf, setnewf] = useState<boolean>(false)
     const { currentFolder } = useSelector((state: RootState) => state.fetchFolder)
