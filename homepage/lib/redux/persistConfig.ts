@@ -10,7 +10,7 @@ export function createPersistStorage(): WebStorage {
     if (isServer) {
         return {
             getItem(_key: string): Promise<string | null> {
-                return Promise.resolve(null); // This is fine, as it returns null in the absence of a value.
+                return Promise.resolve(''); // This is fine, as it returns null in the absence of a value.
             },
             setItem(_key: string, value: string): Promise<void> {
                 return Promise.resolve(); // No-op
