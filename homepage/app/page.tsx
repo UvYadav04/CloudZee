@@ -40,6 +40,8 @@ export default function Home() {
 
       } else if (error || usererror) {
 
+        console.log("error  :", error)
+        console.log("usererrro r : ", usererror)
         //if usererror or error from fetching from useUser, we will redirect to error page
         dispatch(setProfileError(error || usererror));
         redirect("/api/error");
