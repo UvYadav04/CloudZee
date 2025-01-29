@@ -39,7 +39,8 @@
     "app/user/page2.tsx",
     "app/api/auth/[auth0]/route.js",
     "app/components/Barbutton.test.js",
-    "app/server/files/uploadFile/route.ts"
+    "app/server/files/uploadFile/route.ts",
+    "lib/redux/persistConfig.ts"
   ],
   "exclude": [
     "node_modules"

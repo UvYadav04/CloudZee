@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
-import { createPersistStorage } from './redux/persistConfig';
 import fileUploadReducer from '../lib/redux/slices/UploadFile';
 import userProfileReducer from '../lib/redux/slices/ProfileSlice';
 import folderfetchReducer from '../lib/redux/slices/FolderSlice';
 import newfolderReducer from '../lib/redux/slices/NewFolder'
 import { combineReducers } from 'redux';
+import { createPersistStorage } from './redux/persistConfig';
 
 // Persist configuration
 const persistConfig = {
