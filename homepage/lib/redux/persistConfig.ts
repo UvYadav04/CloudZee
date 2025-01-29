@@ -1,24 +1,30 @@
+'use client';
 
-
-
-// import { WebStorage } from "redux-persist/lib/types";
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
-import { WebStorage } from 'redux-persist/lib/types';
-export function createPersistStorage(): WebStorage {
-    const isServer = typeof window === 'undefined';
-    // Returns noop (dummy) storage.
-    if (isServer) {
-        return {
-            getItem(_key: string): Promise<string> {
-                return Promise.resolve(''); // This is fine, as it returns null in the absence of a value.
-            },
-            setItem(_key: string, value: string): Promise<string> {
-                return Promise.resolve(''); // No-op
-            },
-            removeItem(_key: string): Promise<void> {
-                return Promise.resolve(); // No-op
-            },
-        };
-    }
-    return createWebStorage('local'); // Normal behavior for browser environment
+
+interface NoopStorageReturnType {
+    getItem: (_key: any) => Promise<null>
+    setItem: (_key: any, value: any) => Promise<any>
+    removeItem: (_key: any) => Promise<void>
 }
+
+const createNoopStorage = (): NoopStorageReturnType => {
+    return {
+        getItem(_key: any): Promise<null> {
+            return Promise.resolve(null);
+        },
+        setItem(_key: any, value: any): Promise<any> {
+            return Promise.resolve(value);
+        },
+        removeItem(_key: any): Promise<void> {
+            return Promise.resolve();
+        },
+    };
+};
+
+const storage =
+    typeof window !== 'undefined'
+        ? createWebStorage('local')
+        : createNoopStorage();
+
+export default storage;

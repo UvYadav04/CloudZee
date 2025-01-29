@@ -5,12 +5,12 @@ import userProfileReducer from '../lib/redux/slices/ProfileSlice';
 import folderfetchReducer from '../lib/redux/slices/FolderSlice';
 import newfolderReducer from '../lib/redux/slices/NewFolder'
 import { combineReducers } from 'redux';
-import { createPersistStorage } from './redux/persistConfig';
+import storage from './redux/persistConfig';
 
 // Persist configuration
 const persistConfig = {
     key: 'root',
-    storage: createPersistStorage(),  // Using localStorage
+    storage: storage,  // Using localStorage
     whitelist: ['fileUpload', 'userProfile', 'fetchFolder', 'newFolder'],
 };
 
