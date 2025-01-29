@@ -9,11 +9,11 @@ export function createPersistStorage(): WebStorage {
     // Returns noop (dummy) storage.
     if (isServer) {
         return {
-            getItem(_key: string): Promise<string | null> {
+            getItem(_key: string): Promise<string> {
                 return Promise.resolve(''); // This is fine, as it returns null in the absence of a value.
             },
-            setItem(_key: string, value: string): Promise<void> {
-                return Promise.resolve(); // No-op
+            setItem(_key: string, value: string): Promise<string> {
+                return Promise.resolve(''); // No-op
             },
             removeItem(_key: string): Promise<void> {
                 return Promise.resolve(); // No-op
