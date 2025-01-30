@@ -32,7 +32,7 @@ export const createNewFolder = createAsyncThunk(
             // alert("called to homefolder")
             // Making a request to fetch folder data based on the folder name and folder ID
             // console.log(folderId, userId)
-            const response = await fetch(`http://localhost:3000/server/folders/newFolder?folderName=${folderName}&parentId=${encodeURIComponent(parentId)}&userId=${userId}`, {
+            const response = await fetch(`http://cloudzee.vercel.app/server/folders/newFolder?folderName=${folderName}&parentId=${encodeURIComponent(parentId)}&userId=${userId}`, {
                 method: "GET",
             });
 

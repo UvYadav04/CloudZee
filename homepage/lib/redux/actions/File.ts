@@ -6,7 +6,7 @@ export const UploadFile = createAsyncThunk(
         try {
             const formData = new FormData();
             formData.append('file', file);
-            const response = await fetch(`http://localhost:3000/server/files/uploadFile?parentId=${encodeURIComponent(parentId)}&userId=${userId}`, {
+            const response = await fetch(`http://cloudzee.vercel.app/server/files/uploadFile?parentId=${encodeURIComponent(parentId)}&userId=${userId}`, {
                 method: "POST",
                 body: formData
             });

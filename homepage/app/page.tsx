@@ -40,8 +40,8 @@ export default function Home() {
 
       } else if (error || usererror) {
 
-        console.log("error  :", error)
-        console.log("usererrro r : ", usererror)
+        console.log("error: ", error)
+        console.log("usererrror : ", usererror)
         //if usererror or error from fetching from useUser, we will redirect to error page
         dispatch(setProfileError(error || usererror));
         redirect("/api/error");
@@ -52,7 +52,7 @@ export default function Home() {
         router.push("/api/auth/login");
 
       } else {
-
+        console.log(user)
         //if none of above triggers, hence we got our user wo we will set users profile in redux
         dispatch(setProfile(user));
       }
