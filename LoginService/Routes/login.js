@@ -23,7 +23,7 @@ loginrouter.get('/', async (req, res) => {
         const userid = userdetails.rows[0].id;
         const homeid = userdetails.rows[0].home_id;
         const homedetails = await pool.query("Select * from folders where id = $1", [homeid])
-        console.log(userid, homeid)
+        console.log("ids : ", userid, homeid)
         return res.json({ success: true, userid, homeid, home: homedetails.rows[0] })
 
     } catch (error) {

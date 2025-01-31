@@ -25,6 +25,6 @@ export async function GET(req: NextRequest) {
     } catch (error) {
         console.log("Here in the error")
         console.error(error);
-        return NextResponse.json({ success: false, message: "Failed to fetch data from server yellow" });
+        return NextResponse.json({ success: false, message: "Failed to fetch data from server yellow", error: error });
     }
 }
