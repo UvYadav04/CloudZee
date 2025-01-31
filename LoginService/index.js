@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express();
+const cors = require('cors')
 const dotenv = require('dotenv')
 dotenv.config();
 const helmet = require('helmet')
@@ -7,6 +8,7 @@ const loginrouter = require('./Routes/login');
 const authenticator = require('./Middlewares/Authenticator');
 app.use(helmet());
 app.use(express.json())
+app.use(cors())
 
 const port = process.env.PORT || 3000; // Use default port 3000 if not provided
 
