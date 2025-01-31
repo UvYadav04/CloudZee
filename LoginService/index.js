@@ -12,11 +12,6 @@ app.use(cors())
 
 const port = process.env.PORT || 3000; // Use default port 3000 if not provided
 
-app.use((req, res, next) => {
-    console.log(req)
-    next()
-})
-
 // app.get('/', (req, res) => {
 //     res.send({ success: false, message: "please attach a path name with the request" })
 // })
