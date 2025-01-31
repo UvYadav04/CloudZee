@@ -1,5 +1,5 @@
-// import { NextResponse } from "next/server";
-// import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 // // import pool from "./lib/Database/db";
 // export const config = {
 //     matcher: ["/server/:path*", "/home"],
@@ -9,7 +9,43 @@
 // import { neon } from '@neondatabase/serverless';
 // const pool = neon(process.env.DATABASE_URL);
 
-// export async function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
+    const origin = request.nextUrl.origin
+    console.log(request.nextUrl)
+
+    const allowedOrigins = [
+        'https://cloudzee.vercel.app', // Replace with your front-end domain
+        'http://localhost:3000',       // Localhost for development
+    ]
+
+    // Handle preflight request (OPTIONS method)
+    // if (request.method === 'OPTIONS') {
+    //     const response = NextResponse.next()
+    //     response.headers.set('Access-Control-Allow-Origin', origin)
+    //     response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+    //     response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    //     response.headers.set('Access-Control-Max-Age', '86400') // Cache preflight request
+    //     return response
+    // }
+
+    // If origin is allowed, set CORS headers for all other methods (GET, POST, etc.)
+    if (allowedOrigins.includes(origin)) {
+        const response = NextResponse.next()
+        response.headers.set('Access-Control-Allow-Origin', origin)
+        response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+        response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+        console.log("hereajf;lahsdfj")
+        return response
+    }
+
+    // If origin is not allowed, just return the next response
+    return NextResponse.next()
+}
+
+export const config = {
+    matcher: '/server/:path*', // Apply middleware to API routes only
+}
+
 //     console.log("Middleware triggered for:", request.nextUrl.pathname);
 
 //     if (request.nextUrl.pathname === "/server/files/uploadFile") {
