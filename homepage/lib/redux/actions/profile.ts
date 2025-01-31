@@ -13,7 +13,7 @@ export const getUserId = createAsyncThunk(
             })
             if (!response.ok) {
                 alert("no response")
-                throw new Error('Failed to fetch data from server');
+                throw new Error('Failed to fetch data from server nope nope');
             }
             const data = await response.json()
             console.log(data)

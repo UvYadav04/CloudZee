@@ -9,7 +9,7 @@ const allowedOrigins = [
 export async function middleware(request: NextRequest) {
     console.log("Middleware triggered for:", request.nextUrl.pathname);
 
-    const origin = request.headers.get("origin") || "";
+    const origin = request.nextUrl.origin
     const response = NextResponse.next();
 
     // If the request origin is in the allowed list, set CORS headers
