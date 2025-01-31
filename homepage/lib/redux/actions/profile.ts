@@ -8,7 +8,7 @@ export const getUserId = createAsyncThunk(
         try {
             alert("sending request")
             const macAddress = fetchMacAddress();
-            const response = await fetch(`https://cloudzee.vercel.app/server/users/getUserDetails?email=${profile.email}&?mac=${macAddress}`, {
+            const response = await fetch(`https://cloudzee.vercel.app/server/users/getUserDetails?email=${profile.email}&mac=${macAddress}`, {
                 method: "GET"
             })
             if (!response.ok) {

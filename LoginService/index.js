@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 app.use('/user/getUserWithId/:email/:mac', authenticator, loginrouter)
 
-// Basic error handling middleware
+// Basic error handling middleware  
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send("Something went wrong!");

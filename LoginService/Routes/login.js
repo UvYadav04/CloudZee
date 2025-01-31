@@ -4,6 +4,7 @@ const pool = require('../Database/db')
 
 loginrouter.get('/', async (req, res) => {
     try {
+        console.log("in the requst")
         const email = req.email
         const userdetails = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
 
