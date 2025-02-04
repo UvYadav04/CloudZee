@@ -1,19 +1,12 @@
 const { Pool } = require('pg')
 
-const pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_DATABASE,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
-});
 
-pool.query('SELECT NOW()', (err, res) => {
-    if (err) {
-        console.error('Error connecting to the database:', err);
-    } else {
-        console.log('Database connected successfully:', res.rows);
-    }
+
+const pool = new Pool({
+    connectionString: process.env.DB_URI,
+    ssl: {
+        rejectUnauthorized: false, // Use this if connecting to a database with self-signed SSL certificates
+    },
 });
 
 module.exports = pool;
