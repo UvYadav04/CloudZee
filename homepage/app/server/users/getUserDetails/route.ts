@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
         //     return NextResponse.json({ success: false, message: "Email or macAddress is missing" });
         // }
 
-        const response = await fetch(`http://localhost:8080/user/getUserWithId/email=${email}/macAddress=${mac}`);
+        const response = await fetch(`https://cloudzee-loginservice.onrender.com/user/getUserWithId/email=${email}/macAddress=${mac}`);
         const data = await response.json();
 
         console.log(data);
